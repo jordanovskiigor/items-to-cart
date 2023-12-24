@@ -86,15 +86,23 @@ class MainActivity : AppCompatActivity(), AdapterProduct.OnAddToCartClickListene
     }
 
     private fun showCartDialog() {
+        val totalCartPrice = calculateTotalCartPrice()
         val cartItems = getCartItems()
         val dialog = AlertDialog.Builder(this)
-            .setTitle("Your cart")
+            .setTitle("Your cart - Total: ${totalCartPrice}$")
             .setPositiveButton("Close", null)
             .setItems(cartItems.toTypedArray(), null)
             .create()
         dialog.show()
     }
 
+    private fun calculateTotalCartPrice(): String {
+        var total = 0.0
+        for (product in cartProducts) {
+            total += product.totalPrice
+        }
+        return String.format("%.2f", total) // Format to two decimal places
+    }
     private fun getCartItems(): List<String> {
         val cartItems = mutableListOf<String>()
         for (product in cartProducts) {
