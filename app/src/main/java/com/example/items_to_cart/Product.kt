@@ -7,7 +7,9 @@ import android.widget.TextView
 data class Product(
     val productName: String,
     val productPrice: String,
-    val productImage: Int
+    val productImage: Int,
+    var quantity:Int = 0,
+    var totalPrice:Double = 0.0
 )
 
 

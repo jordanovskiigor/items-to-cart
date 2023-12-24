@@ -14,15 +14,15 @@ import androidx.recyclerview.widget.RecyclerView
 class AdapterProduct(val products: List<Product>) :
     RecyclerView.Adapter<AdapterProduct.ProductViewHolder>() {
 
-    //interface for click event
+
     interface OnAddToCartClickListener{
         fun onAddToCartClick(position: Int)
     }
 
-    //click listener variable
+
     private var addToCartClickListener:OnAddToCartClickListener? = null
 
-    //Setter method for click listener
+
     fun setOnAddToCartClickListener(listener:OnAddToCartClickListener) {
         this.addToCartClickListener = listener
     }
