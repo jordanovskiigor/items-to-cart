@@ -91,6 +91,10 @@ class MainActivity : AppCompatActivity(), AdapterProduct.OnAddToCartClickListene
         val dialog = AlertDialog.Builder(this)
             .setTitle("Your cart - Total: ${totalCartPrice}$")
             .setPositiveButton("Close", null)
+            .setNegativeButton("Clear") {_,_ ->
+                clearCart()
+                updateCartBadge()
+            }
             .setItems(cartItems.toTypedArray(), null)
             .create()
         dialog.show()
@@ -101,12 +105,18 @@ class MainActivity : AppCompatActivity(), AdapterProduct.OnAddToCartClickListene
         for (product in cartProducts) {
             total += product.totalPrice
         }
-        return String.format("%.2f", total) // Format to two decimal places
+        return String.format("%.2f", total)
+    }
+
+    private fun clearCart(){
+        cartProducts.clear()
+        badgeCount = 0
     }
     private fun getCartItems(): List<String> {
         val cartItems = mutableListOf<String>()
         for (product in cartProducts) {
-            cartItems.add("${product.productName}\t\t${product.quantity}\t\t${product.totalPrice}$")
+            cartItems.add("${product.productName}\t\t${product.quantity}\t\t${String.format("%.2f", product.totalPrice)}$")
+
         }
         return cartItems
     }
